@@ -1,0 +1,28 @@
+﻿@model List<FirstApp.Entity.ClassInfo>
+
+<div class="container">
+    <table class="table mt-5 table-dark table-stripped p-2">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>action</th>
+
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @item.Id</td>
+                <td> @item.Name</td>
+                <td> @item.Description</td>
+                <td>
+
+                    <a asp-controller="ClassInfo" asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary">update</a>
+                    <a asp-controller="ClassInfo" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">delete</a>
+                </td>
+            </tr>
+        }
+        </thead>
+    </table>
+</div>

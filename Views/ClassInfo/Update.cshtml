@@ -1,0 +1,14 @@
+﻿@model ClassInfoVm
+
+<form method="post" class="my-4">
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input type="text" class="form-control" asp-for="Name" required>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <textarea class="form-control" asp-for="Description" rows="3" required></textarea>
+    </div>
+    
+    <button type="submit" class="btn btn-secondary"> update</button>
+</form>
