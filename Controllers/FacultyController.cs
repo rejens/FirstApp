@@ -50,5 +50,77 @@ private readonly AppDbContext _context;
         }
     }
     
+    [HttpGet]
+    public async Task<IActionResult> Update(long id)
+    {
+        try
+        {
+            var info = await _context.Faculties.Where(x=>x.Id== id).FirstOrDefaultAsync(); 
+            if (info == null)
+            {
+                return NotFound();
+            }
+
+            var model = new FacultyVm()
+            {
+                Name = info.Name,
+                Director = info.Director,
+            };
+            
+            return View(model);
+            
+        }
+        
+        
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+    
+    [HttpPost]
+    
+    public async Task<IActionResult> Update(long id, FacultyVm model)
+    {
+        try
+        {
+            var info = await _context.Faculties.Where(x=>x.Id== id).FirstOrDefaultAsync(); 
+            if (info == null)
+            {
+                return NotFound();
+            }
+
+            info.Name = model.Name;
+            info.Director = model.Director;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> Delete(long id)
+    {
+        try
+        {
+            var info = await _context.Faculties.Where(x=>x.Id== id).FirstOrDefaultAsync(); 
+            if (info == null)
+            {
+                return NotFound();
+            }
+
+            _context.Faculties.Remove(info);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+    
     
 }
